@@ -10,7 +10,7 @@
     "clean": "rimraf dist",
     "lint": "eslint --ext .js --ext .jsx --ext .vue client/",
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue client/",
-    "precommit":"npm run lint-fix"
+    "precommit":"npm run lint"
   },
   "keywords": [],
   "author": "",
