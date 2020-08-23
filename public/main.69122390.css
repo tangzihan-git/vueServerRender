@@ -15,6 +15,24 @@
   font-size: 10px;
 }
 
+#app[data-v-219d396a] {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+#cover[data-v-219d396a] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #999;
+  opacity: 0.9;
+  z-index: -1;
+}
+
 .todo-item {
   position: relative;
   background-color: #fff;
@@ -141,24 +159,6 @@
   padding: 16px 16px 16px 60px;
 }
 
-#app[data-v-219d396a] {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
-#cover[data-v-219d396a] {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #999;
-  opacity: 0.9;
-  z-index: -1;
-}
-
 html,
 body {
   marign: 0;
@@ -167,7 +167,7 @@ body {
   height: 100%;
 }
 body {
-  background-image: url(resource/client/assets/images/logo-1ad693fa.jpg);
+  background-image: url(/public/resource/client/assets/images/logo-1ad693fa.jpg);
   background-size: cover;
   background-position: center center;
   font: 14px;

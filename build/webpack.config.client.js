@@ -1,29 +1,31 @@
 const path = require('path')
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HTMLPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 let MiniCssExtractPlugin = require('mini-css-extract-plugin')
 let { merge }= require('webpack-merge')
 let baseConfig = require('./webpack.config.base')
+const VueClientPlugin = require('vue-server-renderer/client-plugin')
 //获取package.json cross 环境变量
 const isDev = process.env.NODE=='development'
 
 let config
 const devServer = {
-
         port:3000,
         host:'0.0.0.0',
         overlay:{
             errors:true
         },
+        //history路由
+        historyApiFallback:{
+            index:'/index.html'
+        },
         hot:true
-    }
-
+}
 //开发模式生效
 if(isDev){
     config = merge(baseConfig,{
          //sourcemap
-        devtool:'#cheap-module-eval-source-map',
+        devtool:'cheap-module-eval-source-map',
         devServer,
         module:{
             rules:[{
@@ -43,12 +45,15 @@ if(isDev){
         plugins:[
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
-            new HTMLPlugin(),
+            new HTMLPlugin({
+             template:path.join(__dirname,'template.html')
+            }),
             new webpack.DefinePlugin({
                 'process.env':{
                     NODE_ENV:isDev?'"development"':'"production"'
                 }
             }),
+            new VueClientPlugin()//该插件会自动生成js文件名方便服务端渲染引用
         ]
 
     })
@@ -57,11 +62,12 @@ if(isDev){
     //生产环境
     config = merge(baseConfig,{
         entry:{
-            app:path.join(__dirname,'../client/index.js'),
+            app:path.join(__dirname,'../client/client-entry.js'),
             vendor:['vue']//第三方单独打包
         },
         output:{
-            filename:'[name].[chunkhash:8].js'
+            filename:'[name].[chunkhash:8].js',
+            publicPath:'/public/'
         },
         module:{
             rules:[{
@@ -89,11 +95,9 @@ if(isDev){
                 }
             }),
             //单独抽离三方模块
+            new VueClientPlugin()//该插件会自动生成js文件名方便服务端渲染引用
         ]
     })
-
-
-   
 }
 
 

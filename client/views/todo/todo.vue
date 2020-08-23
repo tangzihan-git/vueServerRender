@@ -1,6 +1,6 @@
 <template>
   <section class="real-app">
-        <input type="text" class="add-input" 
+        <input type="text" class="add-input"
         autofocus placeholder="挤下要做什么？" @keyup.enter="addTodo">
         <item :todo="todo"
         v-for="todo in filteredTods"  :key="todo.id" @delTodo="delTodo"></item>
@@ -13,6 +13,23 @@ let id=0
 import item from "./item.vue"
 import tabs from './tabs.vue'
 export default {
+    // beforeRouterEnter(to,from,next){
+    //   next(vm=>{
+    //       cosole.log(vm)
+    //   })
+    // },
+    // /*同一个组件在不同路由的时候触发 */
+    // beforeRouterUpdate(to,from,next){
+    //     /*根据id获取数据减少使用watch*/
+    //     /*数据获取错误*/
+
+    // },
+    // beforeRouterLeave(to,from){
+    //     /*路由离开时候 */
+    //     if(global.confirm('are sure')){
+    //         next()
+    //     }
+    // },
     components:{
         item,tabs
     },
@@ -50,7 +67,7 @@ export default {
         filteredTods(){
           if(this.filter==='all'){
             return this.todos
-          } 
+          }
           const completed = this.filter==='completed'
           return this.todos.filter(todo=>completed===todo.completed)
         }
@@ -64,7 +81,7 @@ export default {
        width 600px
        margin 0 auto
        box-shadow 0 0 5px #666
-    
+
     .add-input{
        position relative
        margin 0
@@ -78,11 +95,11 @@ export default {
        border 1px solid #999
        box-sizing border-box
        padding 16px 16px 16px 60px
-    
-     
-   }
+
 
    }
 
-   
+   }
+
+
 </style>

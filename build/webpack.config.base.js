@@ -5,23 +5,27 @@ const vueLoaderOptions = require('./vue-loader.config')
 //获取package.json cross 环境变量
 const isDev = process.env.NODE=='development'
 const config ={
-    entry:path.join(__dirname,'../client/index.js'),
+    target: 'web',
+    entry:path.join(__dirname,'../client/client-entry.js'),
     output:{
-        filename:'bundle.js',
-        path:path.join(__dirname,'../dist')
+        filename:'bundle.[hash:8].js',
+        path:path.join(__dirname,'../public'),
+        publicPath:'http://127.0.0.1:3000/public/'//请求客户端的资源
     },
     module:{
         rules:[
-            {
-                test:/\.(vue|js|jsx)$/,
-                loader:'eslint-loader',
-                exclude:/node_modules/,
-                enforce:'pre'//预处理
-            },
+            // {
+            //     test:/\.(vue|js|jsx)$/,
+            //     loader:'eslint-loader',
+            //     exclude:/node_modules/,
+            //     enforce:'pre'//预处理
+            // },
             {
                 test:/\.vue$/,
                 loader:'vue-loader',
-                options:vueLoaderOptions(isDev)
+                options:{
+                    extractCSS: true
+                }
             },
             {
                 test:/\.jsx$/,
@@ -51,6 +55,5 @@ const config ={
         new VueLoaderPlugin()
     ]
 }
-
 
 module.exports = config
