@@ -28,7 +28,7 @@ module.exports = function(router,options){
     router.all(/((\.html)|(\.htm))$/i,static('./',{
         maxAge:options.html*86400*1000
     }));
-    router.all(/\.*/,static('./',{
-        maxAge:options.other*86400*1000
-    }))
+    // router.all(/\.*/,static('./',{
+    //     maxAge:options.other*86400*1000
+    // }))
 }

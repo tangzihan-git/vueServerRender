@@ -36,6 +36,7 @@ app.use(async (ctx,next)=>{
 staticRouter(router,{
     html:365
 });
+app.use(router.routes())
 //页面路由
 let pageRouter
 if(isDev){
@@ -43,7 +44,9 @@ if(isDev){
 }else{
     pageRouter = require('./routers/ssr')
 }
-app.use(pageRouter.routes()).use(pageRouter.allowedMethods())
+
+app.use(pageRouter.routes())
+
 const HOST = process.env.HOST || '0.0.0.0'
 const PORT = process.env.PORT || '4444'
 app.listen(PORT,HOST,()=>{

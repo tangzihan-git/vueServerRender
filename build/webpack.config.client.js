@@ -95,7 +95,7 @@ if(isDev){
                 }
             }),
             //单独抽离三方模块
-            new VueClientPlugin()//该插件会自动生成js文件名方便服务端渲染引用
+            new VueClientPlugin()//该插件会自动生成vue-ssr-client-bundle.json文件方便服务端渲染引用
         ]
     })
 }
